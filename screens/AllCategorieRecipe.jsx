@@ -2,6 +2,7 @@ import { StyleSheet, Text, View, FlatList, Pressable } from 'react-native'
 import React from 'react'
 import { CATEGORIES } from '../recettes/data/data.js'
 
+
 export default function AllCategorieRecipe({navigation}) {
     
   return (

@@ -5,9 +5,9 @@ import {
   Image,
   TouchableOpacity,
   ScrollView,
-  Pressable,
+  Pressable, 
 } from 'react-native';
-import React from 'react';
+import React, { useState } from 'react';
 import {MEALS} from '../recettes/data/data.js';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -16,6 +16,11 @@ export default function RecipeCategorie({navigation, route}) {
   const categoryMeals = MEALS.filter(meal =>
     meal.categoryIds.includes(category.id),
   );
+  const [favoris, setFavoris] = useState([]);
+
+  const addToFavoris = (meal) => {
+    setFavoris([...favoris, meal]);
+  };
 
   return (
     <View style={styles.container}>
@@ -34,6 +39,9 @@ export default function RecipeCategorie({navigation, route}) {
               }}
               activeOpacity={0.7}>
               <Image style={styles.img} source={{uri: meal.imageUrl}} />
+              <TouchableOpacity onPress={() => {addToFavoris(meal)}}>
+              <Icon style={styles.heart} name="heart" size={28} color='white' />
+              </TouchableOpacity>
               <View style={styles.cardContent}>
                 <Text style={styles.mealTitle}>{meal.title}</Text>
                 <View style={styles.textContent}>
@@ -53,10 +61,11 @@ export default function RecipeCategorie({navigation, route}) {
                   {meal.isVegetarian && (
                     <Image style={styles.imgIcone} source={require('../asset/vegan.png')} />)}
                   {meal.isLactoseFree && (
-                    <Image style={styles.imgIcone} source={require('../asset/lactose.jpg')} />                  )}
+                    <Image style={styles.imgIcone} source={require('../asset/lactose.jpg')} />)}
                 </View>
               </View>
             </TouchableOpacity>
+            
           ))}
         </View>
       </ScrollView>
@@ -89,7 +98,7 @@ const styles = StyleSheet.create({
   card: {
     backgroundColor: '#fff',
     width: 370,
-    height: 380,
+    height: 400,
     marginBottom: 38,
     borderRadius: 10,
     shadowColor: '#000',
@@ -136,10 +145,15 @@ const styles = StyleSheet.create({
   imgIcone: {
     width: 40,
     height: 40,
+    borderRadius: 50,
   }, 
   imgIconeGluten: {
     width: 25,
     height: 25,
     marginTop: 8
+  },
+  heart: {
+    top: -220,
+    left: 320,
   }
 });

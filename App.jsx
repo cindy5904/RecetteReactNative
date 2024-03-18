@@ -5,6 +5,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import AllCategorieRecipe from './screens/AllCategorieRecipe';
 import RecipeCategorie from './screens/RecipeCategorie';
 import DetailsRecipe from './screens/DetailsRecipe';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const Stack = createNativeStackNavigator();
 
